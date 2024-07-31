@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ExternalLink, Terminal } from 'lucide-react';
+import MatrixBackground from '@/components/MatrixBackground';
 
 const fetchTopStories = async () => {
   const response = await fetch('https://hn.algolia.com/api/v1/search?tags=front_page&hitsPerPage=100');
@@ -41,7 +42,8 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="container mx-auto p-4 bg-background">
+    <div className="container mx-auto p-4 bg-background/80 relative z-10">
+      <MatrixBackground />
       <h1 className="text-4xl font-bold mb-6 text-primary text-glow flex items-center">
         <Terminal className="mr-2" />
         {typingEffect}<span className="animate-pulse">_</span>
@@ -72,7 +74,7 @@ const Index = () => {
       {!isLoading && !error && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredStories.map((story) => (
-            <Card key={story.objectID} className="bg-card border-primary hover:shadow-lg hover:shadow-primary/50 transition-shadow">
+            <Card key={story.objectID} className="bg-card/90 border-primary hover:shadow-lg hover:shadow-primary/50 transition-shadow backdrop-blur-sm">
               <CardHeader>
                 <CardTitle className="text-lg text-primary">{story.title}</CardTitle>
               </CardHeader>
