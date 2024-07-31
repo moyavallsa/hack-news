@@ -74,17 +74,17 @@ const Index = () => {
       {!isLoading && !error && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredStories.map((story) => (
-            <Card key={story.objectID} className="bg-card/90 border-primary hover:shadow-lg hover:shadow-primary/50 transition-shadow backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle className="text-lg text-primary">{story.title}</CardTitle>
+            <Card key={story.objectID} className="bg-card/90 border-primary hover:shadow-lg hover:shadow-pink-500/50 transition-all duration-300 ease-in-out backdrop-blur-sm group">
+              <CardHeader className="group-hover:text-pink-500 transition-colors duration-300">
+                <CardTitle className="text-lg text-primary group-hover:text-pink-500 transition-colors duration-300">{story.title}</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="group-hover:text-pink-300 transition-colors duration-300">
                 <p className="text-sm text-muted-foreground mb-2">Upvotes: {story.points}</p>
                 <Button
                   variant="outline"
                   size="sm"
                   asChild
-                  className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                  className="border-primary text-primary hover:bg-pink-500 hover:text-black hover:border-pink-500 transition-colors duration-300"
                 >
                   <a href={story.url} target="_blank" rel="noopener noreferrer">
                     Hack <ExternalLink className="ml-2 h-4 w-4" />
