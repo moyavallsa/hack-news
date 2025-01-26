@@ -3,8 +3,9 @@ import { useQuery } from '@tanstack/react-query';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ExternalLink, Terminal } from 'lucide-react';
+import { ExternalLink, Terminal, Clock } from 'lucide-react';
 import { useToast } from "@/components/ui/use-toast";
+import { format, formatDistanceToNow } from 'date-fns';
 import MatrixBackground from '@/components/MatrixBackground';
 import Footer from '@/components/Footer';
 
@@ -24,7 +25,7 @@ const Index = () => {
   const { data, isLoading, error, dataUpdatedAt } = useQuery({
     queryKey: ['topStories'],
     queryFn: fetchTopStories,
-    refetchInterval: 60000, // Refetch every minute
+    refetchInterval: 60000,
     onSuccess: (newData, variables, context) => {
       if (context?.previousData && newData.hits.length !== context.previousData.hits.length) {
         toast({
@@ -99,6 +100,10 @@ const Index = () => {
                   <CardTitle className="text-lg text-primary group-hover:text-pink-500 transition-colors duration-300">{story.title}</CardTitle>
                 </CardHeader>
                 <CardContent className="group-hover:text-pink-300 transition-colors duration-300">
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
+                    <Clock className="h-4 w-4" />
+                    <span>{formatDistanceToNow(new Date(story.created_at), { addSuffix: true })}</span>
+                  </div>
                   <p className="text-sm text-muted-foreground mb-2">Upvotes: {story.points}</p>
                   <Button
                     variant="outline"
